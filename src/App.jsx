@@ -32,14 +32,11 @@ function App() {
   ]
   const [quizState, setQuizState] = useState(quizArr)
   const [scoreState, setScoreState] = useState(0)
-  const [checkedState, setCheckedState] = useState(false)
 
   function handleScoreBtn(e) {
     alert(`You scored ${scoreState}`)
     const score = 0
     setScoreState(score)
-    const checkFalse = false
-    setCheckedState(checkFalse)
   }
 
   return (
@@ -56,8 +53,6 @@ function App() {
               options={quiz.options}
               scoreEvent={setScoreState}
               score={scoreState}
-              setCheck={setCheckedState}
-              check={checkedState}
             />
           </div>
         )

@@ -1,30 +1,18 @@
 import React from "react"
+import { Choose } from "./Choose"
 
-export function Options({
-  options,
-  scoreEvent,
-  score,
-  checkedState,
-  setCheck,
-}) {
+export function Options({ options, scoreEvent, score, choose, setChoose }) {
   return (
     <div>
       <p>
         {options.map((option) => {
           return (
             <div>
-              <input
-                type="checkbox"
-                value={option.option}
-                onClick={(e) => {
-                  setCheck(!checkedState)
-                  if (option.correct) {
-                    scoreEvent(score + 1)
-                  }
-                }}
-                checked={checkedState}
-              />{" "}
-              {option.option}
+              <Choose
+                option={option}
+                ScoreEventProp={scoreEvent}
+                scoreProp={score}
+              />
             </div>
           )
         })}
