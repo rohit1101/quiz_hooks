@@ -30,39 +30,13 @@ function App() {
       ],
     },
   ]
-  const [quizState, setQuizState] = useState(quizArr)
-  const [scoreState, setScoreState] = useState(0)
-  const [checkedState, setCheckedState] = useState(false)
-
-  function handleScoreBtn(e) {
-    alert(`You scored ${scoreState}`)
-    const score = 0
-    setScoreState(score)
-    const checkFalse = false
-    setCheckedState(checkFalse)
-  }
+  // const [quizState, setQuizState] = useState(quizArr)
+  // const [scoreState, setScoreState] = useState(0)
+  // const [checkedState, setCheckedState] = useState(false)
 
   return (
     <div className="App">
       <h1>quiz App</h1>
-      <p>Questions (Select only one option)</p>
-      {quizState.map((quiz, index) => {
-        return (
-          <div>
-            <h2>
-              {index + 1}. {quiz.question}
-            </h2>
-            <Options
-              options={quiz.options}
-              scoreEvent={setScoreState}
-              score={scoreState}
-              setCheck={setCheckedState}
-              check={checkedState}
-            />
-          </div>
-        )
-      })}
-      <button onClick={handleScoreBtn}>Get Score!</button>
     </div>
   )
 }
