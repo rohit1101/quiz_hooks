@@ -1,24 +1,17 @@
 import React, { useState } from "react"
+import Option from "./option"
 
-const Answers = ({ options, correct }) => {
-  const [validator, setValidator] = useState("")
-
-  const handleOptionClick = (index) => {
-    if (index === correct) {
-      setValidator("green")
-    }
-  }
-
+const Answers = ({ options, correct, optClick }) => {
   return (
     <div>
       {options.map((option, index) => (
-        <ul>
-          <li
-            className={validator.length !== 0 ? { color: validator } : ""}
-            onClick={() => handleOptionClick(index)}
-          >
-            {option}
-          </li>
+        <ul key={index}>
+          <Option
+            options={option}
+            correct={correct}
+            index={index}
+            eventHandler={optClick}
+          />
         </ul>
       ))}
     </div>

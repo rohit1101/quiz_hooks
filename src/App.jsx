@@ -24,16 +24,27 @@ const quizArr = [
     ],
     correct: 0,
   },
+  {
+    question: "Inside which HTML element do we put the JavaScript?",
+    options: ["<script>", "<js>", "<javascript>", "<scripting>"],
+    correct: 0,
+  },
+  {
+    question: "Inside which HTML element do we put the JavaScript?",
+    options: ["<script>", "<js>", "<javascript>", "<scripting>"],
+    correct: 0,
+  },
 ]
 
 function App() {
   const [question] = useState(quizArr)
   const [next, setNext] = useState()
   const [start, setStart] = useState(true)
-  const handleClick = () => {
+  const [score, setScore] = useState("")
+  const handleClick = (score) => {
     if (next < question.length - 1) {
       setNext(next + 1)
-      console.log(next)
+      setScore(score)
     } else {
       setStart(!start)
     }
@@ -53,12 +64,18 @@ function App() {
       ) : (
         <div>
           <h1>Quiz App</h1>
+          <h3>Question Completed: {`${next + 1} / ${quizArr.length}`}</h3>
           <Question questionNumber={next} question={question[next].question} />
           <Answers
             options={question[next].options}
             correct={question[next].correct}
+            optClick={handleClick}
           />
-          <button onClick={handleClick}>Next Question</button>
+          {question.length - 1 === next ? (
+            ""
+          ) : (
+            <button onClick={handleClick}>Next Question</button>
+          )}
         </div>
       )}
     </div>
