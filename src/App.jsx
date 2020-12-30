@@ -40,13 +40,24 @@ function App() {
   const [question] = useState(quizArr)
   const [next, setNext] = useState()
   const [start, setStart] = useState(true)
-  const [score, setScore] = useState("")
+  const [disable, setDisable] = useState(false)
+  const [score, setScore] = useState(0)
+
   const handleClick = (score) => {
     if (next < question.length - 1) {
       setNext(next + 1)
-      setScore(score)
+      setDisable(!disable)
+      // setScore(score)
     } else {
       setStart(!start)
+    }
+  }
+
+  const handleDisable = (index) => {
+    const correct = question[next].correct
+    if (index === correct) {
+      setScore(score + 1)
+      setDisable(!disable)
     }
   }
 
@@ -67,6 +78,8 @@ function App() {
           <h3>Question Completed: {`${next + 1} / ${quizArr.length}`}</h3>
           <Question questionNumber={next} question={question[next].question} />
           <Answers
+            disable={disable}
+            disableEvent={handleDisable}
             options={question[next].options}
             correct={question[next].correct}
             optClick={handleClick}
