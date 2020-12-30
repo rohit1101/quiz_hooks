@@ -46,7 +46,7 @@ function App() {
   const [score, setScore] = useState(0)
 
   const handleClick = () => {
-    if (next <= question.length) {
+    if (next < question.length) {
       setNext(next + 1)
       setDisable(!disable)
       setNextQuestion(!disableNextQuestion)
