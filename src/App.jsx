@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import "./App.css"
 import Answers from "./Components/answers"
 import Question from "./Components/question"
+import QuizDashboard from "./Components/quizDashboard"
 
 const quizArr = [
   {
@@ -45,7 +46,7 @@ function App() {
   const [score, setScore] = useState(0)
 
   const handleClick = () => {
-    if (next !== question.length) {
+    if (next <= question.length) {
       setNext(next + 1)
       setDisable(!disable)
       setNextQuestion(!disableNextQuestion)
@@ -62,8 +63,6 @@ function App() {
     setDisable(!disable)
     setNextQuestion(!disableNextQuestion)
   }
-
-  console.log(question.length, next)
 
   return (
     <div>
@@ -87,22 +86,15 @@ function App() {
             </h1>
           ) : (
             <div>
-              <h1>Fun Quiz!</h1>
-              <h3>Question Completed: {`${next + 1} / ${quizArr.length}`}</h3>
-              <Question
-                questionNumber={next}
-                question={question[next].question}
-              />
-              <Answers
+              <QuizDashboard
+                next={next}
+                arrLen={question.length}
+                ques={question}
                 disable={disable}
-                disableEvent={handleDisable}
-                options={question[next].options}
-                correct={question[next].correct}
-                optClick={handleClick}
+                clickHandler={handleClick}
+                disableHandler={handleDisable}
+                nextQuestionBtnState={disableNextQuestion}
               />
-              <button disabled={disableNextQuestion} onClick={handleClick}>
-                Next Question
-              </button>
             </div>
           )}
         </div>
