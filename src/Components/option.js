@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 
 const Option = ({ options, index, eventHandler, disable, disableEvent }) => {
   const handleOptionClick = (index) => {
@@ -6,11 +6,9 @@ const Option = ({ options, index, eventHandler, disable, disableEvent }) => {
   }
 
   return (
-    <div>
-      <button disabled={disable} onClick={() => handleOptionClick(index)}>
-        {options}
-      </button>
-    </div>
+    <button disabled={disable} onClick={() => handleOptionClick(index)}>
+      {options}
+    </button>
   )
 }
 

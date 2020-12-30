@@ -25,7 +25,7 @@ const quizArr = [
     correct: 0,
   },
   {
-    question: "Inside which HTML element do we put the JavaScript?",
+    question: "sds",
     options: ["<script>", "<js>", "<javascript>", "<scripting>"],
     correct: 0,
   },
@@ -38,16 +38,17 @@ const quizArr = [
 
 function App() {
   const [question] = useState(quizArr)
-  const [next, setNext] = useState()
+  const [next, setNext] = useState(0)
   const [start, setStart] = useState(true)
   const [disable, setDisable] = useState(false)
+  const [disableNextQuestion, setNextQuestion] = useState(true)
   const [score, setScore] = useState(0)
 
-  const handleClick = (score) => {
-    if (next < question.length - 1) {
+  const handleClick = () => {
+    if (next !== question.length) {
       setNext(next + 1)
       setDisable(!disable)
-      // setScore(score)
+      setNextQuestion(!disableNextQuestion)
     } else {
       setStart(!start)
     }
@@ -57,9 +58,12 @@ function App() {
     const correct = question[next].correct
     if (index === correct) {
       setScore(score + 1)
-      setDisable(!disable)
     }
+    setDisable(!disable)
+    setNextQuestion(!disableNextQuestion)
   }
+
+  console.log(question.length, next)
 
   return (
     <div>
@@ -74,20 +78,32 @@ function App() {
         </button>
       ) : (
         <div>
-          <h1>Quiz App</h1>
-          <h3>Question Completed: {`${next + 1} / ${quizArr.length}`}</h3>
-          <Question questionNumber={next} question={question[next].question} />
-          <Answers
-            disable={disable}
-            disableEvent={handleDisable}
-            options={question[next].options}
-            correct={question[next].correct}
-            optClick={handleClick}
-          />
-          {question.length - 1 === next ? (
-            ""
+          {question.length === next ? (
+            <h1>
+              You scored:{" "}
+              {score < question.length / 2
+                ? `${score}/${question.length} 😕`
+                : `${score}/${question.length} 🚀`}
+            </h1>
           ) : (
-            <button onClick={handleClick}>Next Question</button>
+            <div>
+              <h1>Fun Quiz!</h1>
+              <h3>Question Completed: {`${next + 1} / ${quizArr.length}`}</h3>
+              <Question
+                questionNumber={next}
+                question={question[next].question}
+              />
+              <Answers
+                disable={disable}
+                disableEvent={handleDisable}
+                options={question[next].options}
+                correct={question[next].correct}
+                optClick={handleClick}
+              />
+              <button disabled={disableNextQuestion} onClick={handleClick}>
+                Next Question
+              </button>
+            </div>
           )}
         </div>
       )}

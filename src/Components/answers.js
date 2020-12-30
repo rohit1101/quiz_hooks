@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import Option from "./option"
 
 const Answers = ({ options, correct, optClick, disable, disableEvent }) => {
